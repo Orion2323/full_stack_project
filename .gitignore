@@ -1,3 +1,3 @@
 /backend/node_modules
-/backend/knexfile
 .vscode
+backend/knexfile.js
