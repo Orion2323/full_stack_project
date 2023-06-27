@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 // import routes
 const userRoutes = require('./routes/user.js');
+const sessionRoutes = require('./routes/session.js');
 
 // import middleware
 
@@ -24,6 +25,7 @@ app.get('/health', (req, res, next) => {
 
 // define route handlers here
 app.use('/user', userRoutes);
+app.use('/session', sessionRoutes);
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
