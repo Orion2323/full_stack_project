@@ -11,7 +11,7 @@ const {authenticateJWT} = require("./middleware/auth.js");
 
 // define express app instance
 const app = express();
-const port = 3000;
+const port = 8000;
 
 app.use(createModelMiddleware);
 app.use(bodyParser.json());
