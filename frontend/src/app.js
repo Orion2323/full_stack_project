@@ -1,12 +1,16 @@
 import { Link, BrowserRouter, Routes, Route} from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
+import { routes } from './routes';
 
 // import pages
 
 export default function App() {
     return <>
         <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route> 
+                {
+                    routes().map((route, index) => <Route key={index} {...route} />)
+                } 
+            </Route>
         </Routes>
     </>;
 }
