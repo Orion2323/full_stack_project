@@ -5,7 +5,7 @@ export const LandingPage = () => {
     return <>
          <div className="container-fluid">
             <nav className="navbar navbar-expand-lg mx-5 py-3 p-2 mb-3 bg-dark" aria-label="breadcrumb">
-                <a className="text-decoration-none text-white center" href='/'> MyLibraryWebApp</a>
+                <a className="text-decoration-none text-white" href='/'> MyLibraryWebApp</a>
             </nav>
 
             <div className="jumbotron-fluid mx-5 bg-light" style={{height: '350px'}}>
