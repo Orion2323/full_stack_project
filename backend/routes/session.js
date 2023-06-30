@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 // route to authenticate user
-router.get('/', async (req, res) => {
+router.get('/login', async (req, res) => {
     try {
         const result = await sessionController.authenticateUser(req.body.email,req.body.password);
         if (result.error != undefined) {
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 
 
 // route to create new user
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
         const result = await userController.createUser(req.body.first_name, req.body.last_name, req.body.email, req.body.password);
 
