@@ -8,10 +8,12 @@ export const LandingPage = () => {
                 <a className="text-decoration-none text-white" href='/'> MyLibraryWebApp</a>
             </nav>
 
-            <div className="jumbotron-fluid mx-5 bg-light" style={{height: '350px'}}>
+            <div className="jumbotron-fluid mx-5 bg-light px-5" >
                 <h1 className="display-4 text-center"> My Library WebApp </h1>
                 <p className="lead"> Welcome to My Library WebApp, a personal project meant to sharpen my skills in back-end and front-end 
-                                     development while mixing my love for literature. Login or Register to create your personal library!
+                                     development while mixing my love for literature. Since I have a lot of books, I fugured I could make a digital
+                                     library that keep track of the books I currently have and whether I have read them, and a wishlist of books
+                                     that I want. With that being said, Login or Register to create your personal library!
                 </p>
             </div>
 
