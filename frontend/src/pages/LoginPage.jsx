@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { TextField } from '../components';
-
 
 export const LoginPage = () => {
     const [ email, setEmail ] = useState('');
@@ -35,8 +35,14 @@ export const LoginPage = () => {
                     value={password} 
                     setValue={setPassword}
                 />
-                <div className="text-center">
-                    <button type="button" className="btn btn-outline-primary btn-lg col-2"> Submit </button>
+                <div className="text-center d-grid gap-4 mx-auto">
+                    <Link to="/">
+                        <button type="button" className="btn btn-outline-primary btn-lg col-2"> Log in </button>
+                    </Link>
+
+                    <Link to="/">
+                        <button type="button" className="btn btn-outline-danger btn-lg col-2"> Back </button>
+                    </Link>
                 </div>
             </div>
         </div>
