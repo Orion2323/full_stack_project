@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const LandingPage = () => {
     return <>
          <div className="container-fluid">
-            <nav className="navbar navbar-expand-lg mx-5 py-3 p-2 mb-3 bg-dark" aria-label="breadcrumb">
+            <nav className="navbar navbar-expand-lg mx-5 py-3 p-2 mb-3 bg-success" aria-label="breadcrumb">
                 <a className="text-decoration-none text-white" href='/'> MyLibraryWebApp</a>
             </nav>
 

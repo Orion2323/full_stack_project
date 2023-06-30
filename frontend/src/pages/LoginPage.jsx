@@ -8,7 +8,7 @@ export const LoginPage = () => {
 
     return <> 
         <div className="container-fluid">  
-            <div className="navbar navbar-expand-lg py-2 p-2 bg-success mx-5" aria-label="breadcrumb">
+            <div className="navbar navbar-expand-lg mx-5 py-2 p-2 mb-3 bg-success" aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item active"><a href="/" className="text-decoration-none text-white bg-light-xl"> MyLibraryWebApp</a></li>
                     <li className="breadcrumb-item active text-white" aria-current="page">Login</li>
