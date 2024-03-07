@@ -1,71 +1,50 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { TextField } from '../components';
+import React, { useState, useEffect, useContext, FormEvent} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { Box, Button, Container, FormHelperText, TextField, Typography, } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+
+import UserAPI from "../api/userApi.js"
 
 export const RegisterPage = () => {
     const [ firstName, setFirstName ] = useState('');
     const [ lastName, setLastName ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ password, setPassword] = useState('');
+    const [ loading, setLoading ] = useState(false);
+
+    const navigate = useNavigate();
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        // call register API
+        console.log("here")
+        UserAPI.createUser(firstName, lastName, email, password).then(
+            () => {
+                //navigate("/")
+                //window.location.reload();
+            },
+            (error) => {
+                const reMessage = (
+                    error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+            }
+        )
+
+        setLoading(false)
+    }
 
     return <> 
-        <div className="container-fluid">  
-            <div className="navbar navbar-expand-lg mx-5 py-2 p-2 mb-3 bg-success" aria-label="breadcrumb">
-                <ol className="breadcrumb">
-                    <li className="breadcrumb-item active"><a href="/" className="text-decoration-none text-white bg-light-xl"> MyLibraryWebApp</a></li>
-                    <li className="breadcrumb-item active text-white" aria-current="page"> Register </li>
-                </ol>
-            </div>
-
-            <h1 className="display-4 text-center"> Register </h1>
-
-            <div className="mx-5">
-
-                <TextField 
-                    id="firstName_field"
-                    label="First Name"
-                    placeHolder="Enter first name" 
-                    input_className="form-control "                
-                    value={firstName} 
-                    setValue={setFirstName}
-                />
-
-                <TextField 
-                    id="lastName_field"
-                    label="Last Name"
-                    placeHolder="Enter last name" 
-                    input_className="form-control"                
-                    value={lastName} 
-                    setValue={setLastName}
-                />
-
-                <TextField 
-                    id="email_field"
-                    label="Email"
-                    placeHolder="Enter email" 
-                    input_className="form-control"                
-                    value={email} 
-                    setValue={setEmail}
-                />
-
-                <TextField 
-                    id="password_field"
-                    label="Password"
-                    placeHolder="Password"
-                    input_className="form-control"  
-                    value={password} 
-                    setValue={setPassword}
-                />
-                <div className="text-center d-grid gap-4 mx-auto">
-                    <Link to="/"> 
-                        <button type="button" className="btn btn-outline-primary btn-lg col-2"> Sign up </button>
-                    </Link>
-
-                    <Link to="/">
-                        <button type="button" className="btn btn-outline-danger btn-lg col-2"> Back </button>
-                    </Link>
-                </div>
-            </div>
-        </div>
+        <Container maxWidth="xs">
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 8, }} >
+                <Typography component="h1" variant="h5"> Register </Typography>
+                    <Box component="form" onSubmit={handleSubmit} mt={3}>
+                        <TextField label="First Name" margin="normal" required fullWidth autoComplete="name" onChange={(e) => setFirstName(e.target.value)} value={firstName} autoFocus />
+                        <TextField label="Last Name" margin="normal" required fullWidth autoComplete="name" onChange={(e) => setLastName(e.target.value)} value={lastName} autoFocus />
+                        <TextField label="Email" margin="normal" required fullWidth autoComplete="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
+                        <TextField label="Password" margin="normal" required fullWidth type="password" autoComplete="new-password" onChange={(e) => setPassword(e.target.value)} value={password}/>
+                        <LoadingButton type="submit" variant="contained" loading={loading} sx={{ mt: 4, mb: 3 }}>Register</LoadingButton>
+                    </Box>
+            </Box>
+        </Container>
     </>;
 }
