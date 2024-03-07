@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TextField } from '../components';
+import UserAPIs from "../api/userApi.js";
 
 export const LoginPage = () => {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword] = useState('');
+
+    const navigate = useNavigate();
 
     return <> 
         <div className="container-fluid">  
@@ -24,7 +27,7 @@ export const LoginPage = () => {
                     placeHolder="Enter email" 
                     input_className="form-control"                
                     value={email} 
-                    setValue={setEmail}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <TextField 
@@ -33,7 +36,7 @@ export const LoginPage = () => {
                     placeHolder="Password"
                     input_className="form-control"  
                     value={password} 
-                    setValue={setPassword}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
                 <div className="text-center d-grid gap-4 mx-auto">
                     <Link to="/">
