@@ -1,53 +1,49 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, FormEvent} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { TextField } from '../components';
+import { Box, Button, Container, FormHelperText, TextField, Typography, } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+
 import UserAPIs from "../api/userApi.js";
 
 export const LoginPage = () => {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword] = useState('');
 
+    const [ message, setMessage ] = useState("");
+    const [loading, setLoading ] = useState(false);
+
     const navigate = useNavigate();
 
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        setMessage("")
+        setLoading(false)
+
+        // call login API
+        UserAPIs.loginUser(email, password).then(
+            () => {
+                navigate("/inner-home")
+                // window.location.reload()
+            },
+            (error) => {
+                const reMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+                setMessage(reMessage)
+                setLoading(false)
+            }
+        )
+    }
+
     return <> 
-        <div className="container-fluid">  
-            <div className="navbar navbar-expand-lg mx-5 py-2 p-2 mb-3 bg-success" aria-label="breadcrumb">
-                <ol className="breadcrumb">
-                    <li className="breadcrumb-item active"><a href="/" className="text-decoration-none text-white bg-light-xl"> MyLibraryWebApp</a></li>
-                    <li className="breadcrumb-item active text-white" aria-current="page">Login</li>
-                </ol>
-            </div>
-
-            <h1 className="display-4 text-center"> Login </h1>
-
-            <div className="mx-5">
-                <TextField 
-                    id="email_field"
-                    label="Email"
-                    placeHolder="Enter email" 
-                    input_className="form-control"                
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-
-                <TextField 
-                    id="password_field"
-                    label="Password"
-                    placeHolder="Password"
-                    input_className="form-control"  
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <div className="text-center d-grid gap-4 mx-auto">
-                    <Link to="/">
-                        <button type="button" className="btn btn-outline-primary btn-lg col-2"> Log in </button>
-                    </Link>
-
-                    <Link to="/">
-                        <button type="button" className="btn btn-outline-danger btn-lg col-2"> Back </button>
-                    </Link>
-                </div>
-            </div>
-        </div>
+       <Container maxWidth="xs">
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 8, }} >
+                <Typography component="h1" variant="h5"> Register </Typography>
+                    <Box component="form" onSubmit={handleSubmit} mt={3}>
+                        <TextField label="Email" margin="normal" required fullWidth autoComplete="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
+                        <TextField label="Password" margin="normal" required fullWidth type="password" autoComplete="new-password" onChange={(e) => setPassword(e.target.value)} value={password}/>
+                        <LoadingButton type="submit" variant="contained" loading={loading} sx={{ mt: 4, mb: 3 }}>Register</LoadingButton>
+                        <FormHelperText>{message}</FormHelperText>
+                    </Box>
+            </Box>
+        </Container>
     </>;
 }

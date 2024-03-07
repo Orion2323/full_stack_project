@@ -2,16 +2,25 @@ import axios from "axios";
 
 const SessionURL="http://localhost:9000/session/";
 
-export const getUserbyUsername = (username) => {
-    console.log("getting" + username)
-    return axios.get(SessionURL + "login" +  username)
-    .then(x=>x.data)
-    .catch(err=>err)
+export const loginUser = (email, password) => {
+    console.log("logging in user")
+    const user = {
+        email: email,
+        password: password
+    }
+
+    return axios.post(SessionURL + "login", user)
+    .then((response) => {
+        if (response.data.user) {
+            localStorage.setItem("user", JSON.stringify(response.data.user))
+        }
+
+        return response.data
+    })
 }
 
 export const createUser = (firstName, lastName, email, password) => {
     console.log("creating " + firstName)
-    console.log(SessionURL + 'register')
     const newUser = {
         first_name: firstName,
         last_name: lastName,
@@ -20,12 +29,10 @@ export const createUser = (firstName, lastName, email, password) => {
     }
 
     return axios.post(SessionURL + "register", newUser)
-    .then(x=>x.data)
-    .catch(err=>err)
 }
 
 const APIList = {
-    getUserbyUsername,
+    loginUser,
     createUser
 }
 
