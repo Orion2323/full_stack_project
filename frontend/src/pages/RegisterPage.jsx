@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext, FormEvent} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import { Box, Button, Container, FormHelperText, TextField, Typography, } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
@@ -22,8 +21,8 @@ export const RegisterPage = () => {
         // call register API
         UserAPI.createUser(firstName, lastName, email, password).then(
             () => {
-                //navigate("/")
-                //window.location.reload();
+                navigate("/")
+                window.location.reload();
             },
             (error) => {
                 const reMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();

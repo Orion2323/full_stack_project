@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 // route to authenticate user
-router.get('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
         const result = await sessionController.authenticateUser(req.body.email,req.body.password);
         if (result.error != undefined) {

@@ -51,7 +51,6 @@ const createUser = async (first_name, last_name, email, password) => {
     return result;
 }
 
-
 module.exports = {
     getUsers,
     createUser
