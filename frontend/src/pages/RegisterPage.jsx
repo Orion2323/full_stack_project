@@ -11,26 +11,26 @@ export const RegisterPage = () => {
     const [ lastName, setLastName ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ password, setPassword] = useState('');
+
     const [ loading, setLoading ] = useState(false);
+    const [ message, setMessage ] = useState('')
 
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         // call register API
-        console.log("here")
         UserAPI.createUser(firstName, lastName, email, password).then(
             () => {
                 //navigate("/")
                 //window.location.reload();
             },
             (error) => {
-                const reMessage = (
-                    error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+                const reMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+                setMessage(reMessage)
+                setLoading(false)
             }
         )
-
-        setLoading(false)
     }
 
     return <> 
@@ -43,6 +43,7 @@ export const RegisterPage = () => {
                         <TextField label="Email" margin="normal" required fullWidth autoComplete="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
                         <TextField label="Password" margin="normal" required fullWidth type="password" autoComplete="new-password" onChange={(e) => setPassword(e.target.value)} value={password}/>
                         <LoadingButton type="submit" variant="contained" loading={loading} sx={{ mt: 4, mb: 3 }}>Register</LoadingButton>
+                        <FormHelperText>{message}</FormHelperText>
                     </Box>
             </Box>
         </Container>

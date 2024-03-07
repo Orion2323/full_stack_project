@@ -18,9 +18,6 @@ app.use(createModelMiddleware);
 app.use(bodyParser.json());
 app.use(cors());
 
-
-// enable CORS
-
 // health route 
 app.get('/health', (req, res, next) => {
     const responseBody = {

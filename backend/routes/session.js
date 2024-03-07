@@ -9,12 +9,12 @@ router.get('/login', async (req, res) => {
     try {
         const result = await sessionController.authenticateUser(req.body.email,req.body.password);
         if (result.error != undefined) {
-            res.status(result.status).json(result.error)
+            return res.status(result.status).json(result.error)
         } else {
-            res.status(200).json(result)
+            return res.status(200).json(result)
         }
     } catch (err) {
-        res.status(500).json({message: err.toString()});
+        return res.status(500).json({error: err.toString()});
     }
 })
 
@@ -26,12 +26,12 @@ router.post('/register', async (req, res) => {
 
         // check result
         if (result.error != undefined) {
-            res.status(result.status).json(result.error);
+            return res.status(result.status).json(result.error);
         } else {
-            res.status(201).json(result);
+            return res.status(201).json(result);
         }
     } catch (err) {
-        res.status(500).json({message: err.toString()});
+        return res.status(500).json({error: err.toString()});
     }
 })
 
