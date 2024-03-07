@@ -2,7 +2,6 @@ import { Link, BrowserRouter, Routes, Route} from 'react-router-dom';
 import { routes } from './routes';
 
 // import pages
-
 export default function App() {
     return <>
         <Routes>

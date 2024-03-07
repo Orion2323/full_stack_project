@@ -22,7 +22,6 @@ app.get('/health', (req, res, next) => {
         status: 'up',
         port,
     };
-
     res.json(responseBody);
     next();
 });
