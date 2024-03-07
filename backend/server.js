@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 // import routes
 const userRoutes = require('./routes/user.js');
@@ -11,10 +12,14 @@ const {authenticateJWT} = require("./middleware/auth.js");
 
 // define express app instance
 const app = express();
-const port = 8000;
+const port = 9000;
 
 app.use(createModelMiddleware);
 app.use(bodyParser.json());
+app.use(cors());
+
+
+// enable CORS
 
 // health route 
 app.get('/health', (req, res, next) => {
