@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, FormEvent} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Box, Button, Container, FormHelperText, TextField, Typography, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Box, Button, Container, FormHelperText, TextField, Typography, Grid, Breadcrumbs, Link } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 import UserAPI from "../api/userApi.js"
@@ -33,6 +33,11 @@ export const RegisterPage = () => {
     }
 
     return <> 
+        <Breadcrumbs separator='>' className='mx-5 py-3 p-2 mb-3' backgroundColor='green' aria-label='breadcrumb' flexDirection='column'>
+            <Link underline='hover' href='/' color='black'> MyLibraryWebApp</Link>
+            <Link underline='hover' href='/register' color='black'> Register </Link> 
+        </Breadcrumbs>
+
         <Container maxWidth="xs">
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 8, }} >
                 <Typography component="h1" variant="h5"> Register </Typography>

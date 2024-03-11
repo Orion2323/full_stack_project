@@ -7,11 +7,11 @@ export const LandingPage = () => {
     const navigate = useNavigate();
 
     return <>
-        <Container maxWidth='lg'>
-            <Breadcrumbs separator='>' className='mx-5 py-3 p-2 mb-3' backgroundColor='green' aria-label='breadcrumb' flexDirection='column'>
-                <Link underline='hover' href='/' color='black'> MyLibraryWebApp</Link>
-            </Breadcrumbs>
+        <Breadcrumbs separator='>' className='mx-5 py-3 p-2 mb-3' backgroundColor='green' aria-label='breadcrumb' flexDirection='column'>
+            <Link underline='hover' href='/' color='black'> MyLibraryWebApp</Link>
+        </Breadcrumbs>
         
+        <Container maxWidth='lg'>        
             <Typography gutterBottom alignItems='center' justifyContent='center' display='flex' variant='h2'> My Library WebApp </Typography>
             <Typography gutterBottom mt={6} variant='body1'> 
                 Welcome to My Library WebApp, a personal project meant to sharpen my skills in back-end and front-end 
