@@ -22,10 +22,10 @@ export const LandingPage = () => {
 
             <Grid container spacing={1} columns={16} mt={10}> 
                 <Grid item xs={8} alignItems='center' justifyContent='center' display='flex'>
-                    <Button variant='outlined' color='success' size='large'> Register </Button>
+                    <Button variant='outlined' color='success' size='large' onClick={() => navigate('/register')}> Register </Button>
                 </Grid>
                 <Grid item xs={8} alignItems='center' justifyContent='center' display='flex'>
-                    <Button variant='outlined' color='primary' size='large'> Login </Button>
+                    <Button variant='outlined' color='primary' size='large' onClick={() => navigate('/login')}> Login </Button>
                 </Grid>
             </Grid>
         </Container>
