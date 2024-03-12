@@ -1,18 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, Breadcrumbs, Typography, Link, Grid, Container} from '@mui/material';
+import { Button, Breadcrumbs, Typography, Link, Grid, Container, AppBar, Toolbar, Box} from '@mui/material';
 
 export const LandingPage = () => {
     const navigate = useNavigate();
 
     return <>
-        <Breadcrumbs separator='>' className='mx-5 py-3 p-2 mb-3' backgroundColor='green' aria-label='breadcrumb' flexDirection='column'>
-            <Link underline='hover' href='/' color='black'> MyLibraryWebApp</Link>
-        </Breadcrumbs>
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static" color='success'>
+                <Toolbar>
+                    <Link underline='hover' href='/' color='text.primary' aria-current="page"> MyLibraryWebApp </Link>
+                </Toolbar>
+            </AppBar>
+        </Box>
         
         <Container maxWidth='lg'>        
-            <Typography gutterBottom alignItems='center' justifyContent='center' display='flex' variant='h2'> My Library WebApp </Typography>
             <Typography gutterBottom mt={6} variant='body1'> 
                 Welcome to My Library WebApp, a personal project meant to sharpen my skills in back-end and front-end 
                 development while mixing my love for literature. Since I have a lot of books, I fugured I could make a digital

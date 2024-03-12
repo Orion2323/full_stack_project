@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, FormEvent} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Container, FormHelperText, TextField, Typography, Grid, Link, Breadcrumbs } from '@mui/material';
+import { Box, Button, Container, FormHelperText, TextField, Typography, Grid, Link, Breadcrumbs, AppBar, Toolbar } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 import UserAPIs from "../api/userApi.js";
@@ -15,7 +15,7 @@ export const LoginPage = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
         setMessage("")
         setLoading(false)
 
@@ -23,30 +23,39 @@ export const LoginPage = () => {
         UserAPIs.loginUser(email, password).then(
             () => {
                 navigate("/inner-home")
-                // window.location.reload()
+                window.location.reload()
             },
             (error) => {
-                const reMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-                setMessage(reMessage)
+                setMessage(error.response.data)
                 setLoading(false)
             }
         )
     }
 
     return <> 
-        <Breadcrumbs separator='>' className='mx-5 py-3 p-2 mb-3' backgroundColor='green' aria-label='breadcrumb' flexDirection='column'>
-            <Link underline='hover' href='/' color='black'> MyLibraryWebApp </Link>
-            <Link underline='hover' href='/login' color='black'> Login </Link> 
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static" color='success'>
+                <Toolbar>
+                    <Link underline='hover' href='/' color='text.primary' aria-current="page"> MyLibraryWebApp </Link>
+                </Toolbar>
+            </AppBar>
+            <Breadcrumbs separator='/' className='p-2' aria-label='breadcrumb' flexDirection='row' backgroundColor='#b2ffdd'>
+                <Box ml={2}>
+                    <Link underline='hover' href='/' color='black'> MyLibraryWebApp </Link>
+                    <Link underline='hover' href='/login' color='black'> Login </Link> 
+                </Box>
         </Breadcrumbs>
+        </Box>
 
        <Container maxWidth="xs">
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 8, }} >
-                <Typography component="h1" variant="h5"> Register </Typography>
+                <Typography component="h1" variant="h5"> Log In </Typography>
                     <Box component="form" onSubmit={handleSubmit} mt={3}>
                         <TextField label="Email" margin="normal" required fullWidth autoComplete="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
                         <TextField label="Password" margin="normal" required fullWidth type="password" autoComplete="new-password" onChange={(e) => setPassword(e.target.value)} value={password}/>
+                        <FormHelperText>{message}</FormHelperText>
 
-                        <Grid container spacing={1} columns={16} mt={5}>
+                        <Grid container spacing={1} columns={16} mt={2}>
                             <Grid item xs={8} alignItems='center' justifyContent='center' display='flex'>
                                 <LoadingButton type="submit" color='primary' variant="contained" loading={loading} sx={{ mt: 4, mb: 3 }}> Login </LoadingButton>
                             </Grid>
@@ -54,7 +63,6 @@ export const LoginPage = () => {
                                 <LoadingButton type="submit" color='error' variant="contained" loading={loading} onClick={() => navigate('/')}sx={{mt: 4, mb: 3}}> Cancel </LoadingButton>
                             </Grid>
                         </Grid>
-                        <FormHelperText>{message}</FormHelperText>
                     </Box>
             </Box>
         </Container>
